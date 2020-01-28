@@ -26,7 +26,10 @@ export class TodoItem extends Component {
             onChange={this.props.markComplete.bind(this, id)}
           ></input>{' '}
           {title}
-          <button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>
+          <button
+            onClick={this.props.delTodo.bind(this, title)}
+            style={btnStyle}
+          >
             X
           </button>
         </p>
