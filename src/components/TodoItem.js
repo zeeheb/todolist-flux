@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// import CheckBoxes from '../CheckBoxes';
+import EditIcon from '@material-ui/icons/Edit';
+// import FloatingActionButtons from '../FloatingActionButtons';
+import Actions from '../actions/Actions';
+import { Button } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import FormControlLabelPosition from '../FormControlLabelPosition';
+// import AddIcon from '@material-ui/icons/Add';
 
 export class TodoItem extends Component {
   getStyle = () => {
@@ -13,6 +21,11 @@ export class TodoItem extends Component {
     };
   };
 
+  onEdit = id => {
+    // this.setState({ id: e.target.value });
+    Actions.editItemFromLocalStorage(id);
+  };
+
   render() {
     const { id, title } = this.props.todo;
     // const id = this.props.todo.id;
@@ -21,17 +34,16 @@ export class TodoItem extends Component {
     return (
       <div style={this.getStyle()}>
         <p>
-          <input
-            type='checkbox'
+          <FormControlLabelPosition
+            label={title}
             onChange={this.props.markComplete.bind(this, id)}
-          ></input>{' '}
-          {title}
-          <button
-            onClick={this.props.delTodo.bind(this, title)}
-            style={btnStyle}
-          >
-            X
-          </button>
+          ></FormControlLabelPosition>
+          <Button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>
+            <DeleteIcon></DeleteIcon>
+          </Button>
+          <Button onClick={() => this.onEdit(id)} style={btnStyle}>
+            <EditIcon></EditIcon>
+          </Button>
         </p>
       </div>
     );
@@ -44,11 +56,6 @@ TodoItem.propTypes = {
 };
 
 const btnStyle = {
-  background: 'red',
-  color: 'white',
-  border: 'none',
-  padding: '2px 5px',
-  borderRadius: '50%',
   cursor: 'pointer',
   float: 'right'
 };

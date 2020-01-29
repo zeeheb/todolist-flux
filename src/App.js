@@ -25,7 +25,6 @@ class App extends React.Component {
 
   componentDidMount() {
     Store.addChangeListener(this.onChange);
-
     Actions.getFromLocalStorage();
 
     // Actions.saveToLocalStorage();
@@ -55,8 +54,8 @@ class App extends React.Component {
   };
 
   //delete todo
-  delTodo = title => {
-    Actions.deleteFromLocalStorage(title);
+  delTodo = id => {
+    Actions.deleteFromLocalStorage(id);
 
     //   this.setState({
     //     todos: [...this.state.todos.filter(todo => todo.id !== id)]
@@ -65,16 +64,20 @@ class App extends React.Component {
   };
 
   //Add Todo
-  addTodo = title => {
-    Actions.saveToLocalStorage(
-      {
-        id: uuid.v4(),
-        dateCreated: moment(),
-        title,
-        completed: false
-      }
-      // this.renderModal
-    );
+  addTodo = (title, id) => {
+    if (id) {
+      Actions.saveEdition({ title, lastUpdated: moment(), id });
+    } else {
+      Actions.saveToLocalStorage(
+        {
+          id: uuid.v4(),
+          dateCreated: moment(),
+          title,
+          completed: false
+        }
+        // this.renderModal
+      );
+    }
   };
 
   // renderModal = mensagem => {

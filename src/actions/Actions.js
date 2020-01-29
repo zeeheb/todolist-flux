@@ -22,14 +22,18 @@ export class Actions {
     dispatch(ActionTypes.GET_FROM_LOCALSTORAGE, { data: this.getData() });
   }
 
+  saveEdition(obj) {
+    // const item = _.find(this.getData, )
+  }
+
   getData() {
     return JSON.parse(localStorage.getItem('todo')) || [];
     // return localStorage.getItem('todo') || [];
   }
 
-  deleteFromLocalStorage(title) {
+  deleteFromLocalStorage(id) {
     const data = this.getData();
-    const filteredData = _.filter(data, value => value.title !== title);
+    const filteredData = _.filter(data, value => value.id !== id);
     //   data.forEach(value => {
     //     if (value.title === title) {
     //     }
@@ -38,6 +42,11 @@ export class Actions {
     localStorage.setItem('todo', JSON.stringify(filteredData));
     // setTimeout(() => this.getFromLocalStorage(), 3000);
     this.getFromLocalStorage();
+  }
+
+  editItemFromLocalStorage(id) {
+    const item = _.find(this.getData(), ['id', id]);
+    dispatch(ActionTypes.GETITEM_FROM_LOCALSTORAGE, { data: item });
   }
 }
 

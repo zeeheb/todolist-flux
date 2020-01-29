@@ -1,9 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Store from '../stores/Store';
+import { Actions } from '../actions/Actions';
+import AddIcon from '@material-ui/icons/Add';
+import { Button } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 
 export class AddTodo extends Component {
   state = {
     title: ' '
+  };
+
+  componentDidMount() {
+    Store.addChangeListener(this.onChange);
+
+    // Actions.saveToLocalStorage();
+    // Axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
+    //   .then(res => this.setState({ todos: res.data }))
+  }
+
+  componentWillUnmount() {
+    Store.removeChangeListener(this.onChange);
+  }
+
+  onChange = () => {
+    const dataFromStore = Store.getItemData();
+    if (dataFromStore) {
+      this.setState({ title: dataFromStore.title, id: dataFromStore.id });
+    }
   };
 
   changeValue = e => {
@@ -12,32 +36,41 @@ export class AddTodo extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.addTodo(this.state.title);
+    this.props.addTodo(this.state.title, this.state.id);
     this.setState({ title: '' });
   };
 
   render() {
+    // const { title } = this.state;
     return (
       <div>
         <form
           onSubmit={this.onSubmit}
           style={{ display: 'flex', marginBottom: '10px' }}
         >
-          <input
+          <TextField
+            id='outlined-basic'
+            variant='outlined'
+            type='text'
+            name='title'
+            placeholder='Add ToDo'
+            style={{ flex: '10', padding: '10px' }}
+            title={this.state.title}
+            onChange={this.changeValue}
+          ></TextField>
+
+          {/* <input
             type='text'
             name='title'
             placeholder='Add ToDo...'
             style={{ flex: '10', padding: '10px' }}
             value={this.state.title}
             onChange={this.changeValue}
-          />
+          /> */}
 
-          <input
-            type='submit'
-            value='Submit'
-            className='btn'
-            style={{ flex: '1' }}
-          ></input>
+          <Button className='btn' type='submit'>
+            <AddIcon></AddIcon>
+          </Button>
         </form>
       </div>
     );
