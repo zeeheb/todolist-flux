@@ -12,7 +12,6 @@ import Store from './stores/Store';
 import Actions from './actions/Actions';
 // import moment from 'moment';
 // import _ from 'lodash';
-// import AlertDialog from './AlertDialog';
 // import SimpleModal from './SimpleModal';
 
 class App extends React.Component {
@@ -68,26 +67,13 @@ class App extends React.Component {
     if (id) {
       Actions.saveEdition({ title, id });
     } else {
-      Actions.saveToLocalStorage(
-        {
-          id: uuid.v4(),
-          // dateCreated: moment().format('DD/MM/YYYY'),
-          title,
-          completed: false
-          // lastUpdated: moment()
-        }
-        // this.renderModal
-      );
+      Actions.saveToLocalStorage({
+        id: uuid.v4(),
+        title,
+        completed: false
+      });
     }
   };
-
-  // renderModal = mensagem => {
-  //   this.setState({ showDialog: true });
-  // };
-
-  // closeModal = () => {
-  //   this.setState({ showDialog: false });
-  // };
 
   render() {
     return (

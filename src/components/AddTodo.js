@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Store from '../stores/Store';
-import Actions from '../actions/Actions';
+// import Actions from '../actions/Actions';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
@@ -53,9 +53,9 @@ export class AddTodo extends Component {
             variant='outlined'
             type='text'
             name='title'
-            placeholder='Add ToDo'
+            label='Add ToDo'
             style={{ flex: '10', padding: '10px' }}
-            title={this.state.title}
+            value={this.state.title}
             onChange={this.changeValue}
           ></TextField>
 

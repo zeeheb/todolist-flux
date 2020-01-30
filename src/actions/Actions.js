@@ -11,33 +11,36 @@ export class Actions {
     // localStorage.setItem('todo', arrayJson);
 
     axios
-      .post('http://localhost:3001/todo/add', data, {
+      .post('http://localhost:3001/todo/', data, {
         headers: {
           'content-type': 'application/json',
           // Accept: 'application/json'
           'Access-Control-Allow-Origin': '*'
         }
       })
+      .then(() => {
+        this.getFromLocalStorage();
+      })
       .catch(err => console.log(err));
 
     // alert('O objeto foi adicionado com sucesso');
     // callback('O objeto foi adicionado com sucesso');
-    this.getFromLocalStorage();
   };
 
   getFromLocalStorage() {
     axios
-      .get('http://localhost:3001/todo/')
+      .get('http://localhost:3001/todo')
       .then(res => {
         dispatch(ActionTypes.GET_FROM_LOCALSTORAGE, res);
+        // return res.data;
       })
       .catch(err => console.log(err));
-
     // dispatch(ActionTypes.GET_FROM_LOCALSTORAGE, { data: this.getData() });
   }
 
   saveEdition(obj) {
-    const arrayData = this.getData();
+    // const arrayData = this.getData();
+    const arrayData = this.getFromLocalStorage();
     const index = _.findIndex(arrayData, ['id', obj.id]);
     arrayData[index].title = obj.title;
     // item.
@@ -53,16 +56,12 @@ export class Actions {
   }
 
   deleteFromLocalStorage(id) {
-    const data = this.getData();
-    const filteredData = _.filter(data, value => value.id !== id);
-    //   data.forEach(value => {
-    //     if (value.title === title) {
-    //     }
-    //   });
-
-    localStorage.setItem('todo', JSON.stringify(filteredData));
-    // setTimeout(() => this.getFromLocalStorage(), 3000);
-    this.getFromLocalStorage();
+    axios
+      .delete(`http://localhost:3001/todo?id=${id}`)
+      .then(res => {
+        this.getFromLocalStorage();
+      })
+      .catch(err => console.log(err));
   }
 
   editItemFromLocalStorage(id) {
