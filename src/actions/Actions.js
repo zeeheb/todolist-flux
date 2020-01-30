@@ -22,11 +22,18 @@ export class Actions {
 
     // alert('O objeto foi adicionado com sucesso');
     // callback('O objeto foi adicionado com sucesso');
-    // this.getFromLocalStorage();
+    this.getFromLocalStorage();
   };
 
   getFromLocalStorage() {
-    dispatch(ActionTypes.GET_FROM_LOCALSTORAGE, { data: this.getData() });
+    axios
+      .get('http://localhost:3001/todo/')
+      .then(res => {
+        dispatch(ActionTypes.GET_FROM_LOCALSTORAGE, res);
+      })
+      .catch(err => console.log(err));
+
+    // dispatch(ActionTypes.GET_FROM_LOCALSTORAGE, { data: this.getData() });
   }
 
   saveEdition(obj) {
