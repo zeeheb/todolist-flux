@@ -70,8 +70,8 @@ class App extends React.Component {
     } else {
       Actions.saveToLocalStorage(
         {
-          id: uuid.v4(),
-          dateCreated: moment(),
+          // id: uuid.v4(),
+          dateCreated: moment().format('DD/MM/YYYY'),
           title,
           completed: false
         }

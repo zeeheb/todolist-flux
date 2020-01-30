@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Store from '../stores/Store';
-import { Actions } from '../actions/Actions';
+import Actions from '../actions/Actions';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
