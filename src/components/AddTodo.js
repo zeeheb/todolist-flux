@@ -59,15 +59,6 @@ export class AddTodo extends Component {
             onChange={this.changeValue}
           ></TextField>
 
-          {/* <input
-            type='text'
-            name='title'
-            placeholder='Add ToDo...'
-            style={{ flex: '10', padding: '10px' }}
-            value={this.state.title}
-            onChange={this.changeValue}
-          /> */}
-
           <Button className='btn' type='submit'>
             <AddIcon></AddIcon>
           </Button>

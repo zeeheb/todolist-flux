@@ -28,8 +28,6 @@ export class TodoItem extends Component {
 
   render() {
     const { id, title } = this.props.todo;
-    // const id = this.props.todo.id;
-    // const title = this.props.todo.title;
 
     return (
       <div style={this.getStyle()}>
@@ -49,11 +47,6 @@ export class TodoItem extends Component {
     );
   }
 }
-
-// proptypes
-TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired
-};
 
 const btnStyle = {
   cursor: 'pointer',
