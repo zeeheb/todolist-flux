@@ -14,6 +14,7 @@ import Actions from './actions/Actions';
 // import _ from 'lodash';
 // import SimpleModal from './SimpleModal';
 import FormDialog from './FormDialog';
+import SnackBar from './SnackBar';
 
 class App extends React.Component {
   constructor(props) {
@@ -54,8 +55,8 @@ class App extends React.Component {
   };
 
   //delete todo
-  delTodo = id => {
-    Actions.deleteFromLocalStorage(id);
+  delTodo = (id, callback) => {
+    Actions.deleteFromLocalStorage(id, callback);
 
     //   this.setState({
     //     todos: [...this.state.todos.filter(todo => todo.id !== id)]
@@ -84,6 +85,14 @@ class App extends React.Component {
     this.setState({ showDialog: false });
   };
 
+  onDelete = () => {
+    this.setState({ showError: true });
+  };
+
+  onDeleteClose = () => {
+    this.setState({ showError: false });
+  };
+
   render() {
     return (
       <Router>
@@ -99,8 +108,11 @@ class App extends React.Component {
                     <FormDialog onClose={this.onClose} />
                   )}
                   <AddTodo addTodo={this.addTodo} />
-
+                  {this.state.showError && (
+                    <SnackBar onDeleteClose={this.onDeleteClose} />
+                  )}
                   <Todos
+                    onDelete={this.onDelete}
                     onEdit={this.onEdit}
                     todos={this.state.todos}
                     markComplete={this.markComplete}

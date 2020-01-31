@@ -55,10 +55,11 @@ export class Actions {
     // return localStorage.getItem('todo') || [];
   }
 
-  deleteFromLocalStorage(id) {
+  deleteFromLocalStorage(id, callback) {
     axios
       .delete(`http://localhost:3001/todo?id=${id}`)
       .then(res => {
+        callback();
         this.getFromLocalStorage();
       })
       .catch(err => console.log(err));

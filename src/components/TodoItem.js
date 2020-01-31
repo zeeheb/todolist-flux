@@ -26,6 +26,12 @@ export class TodoItem extends Component {
   //   Actions.editItemFromLocalStorage(id);
   // };
 
+  onClickCustom = () => {
+    const id = this.props.todo.id;
+    this.props.delTodo(id, this.props.onDelete);
+    // ;
+  };
+
   render() {
     const { id, title } = this.props.todo;
 
@@ -36,10 +42,10 @@ export class TodoItem extends Component {
             label={title}
             onChange={this.props.markComplete.bind(this, id)}
           ></FormControlLabelPosition>
-          <Button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>
+          <Button onClick={this.onClickCustom} style={btnStyle}>
             <DeleteIcon></DeleteIcon>
           </Button>
-          <Button onClick={() => this.props.onEdit(id)} style={btnStyle}>
+          <Button onClick={this.props.onEdit} style={btnStyle}>
             <EditIcon></EditIcon>
           </Button>
         </p>

@@ -8,20 +8,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default class FormDialog extends Component {
-  //   const [open, setOpen] = React.useState(false);
-
-  //   const handleClickOpen = () => {
-  //     setOpen(true);
-  //   };
-  //   let setOpen = true;
-
-  //   const handleClose = () => {
-  //     setOpen = false;
-  //   };
   render() {
     return (
       <div>
         <Dialog
+          fullWidth
           open={true}
           onClose={this.props.onClose}
           aria-labelledby='form-dialog-title'
@@ -33,7 +24,7 @@ export default class FormDialog extends Component {
               autoFocus
               margin='dense'
               id='name'
-              label='New Todo'
+              label='New ToDo'
               type='text'
               fullWidth
             />
@@ -43,7 +34,7 @@ export default class FormDialog extends Component {
               Cancel
             </Button>
             <Button onClick={this.props.onClose} color='primary'>
-              Subscribe
+              Confirm
             </Button>
           </DialogActions>
         </Dialog>
