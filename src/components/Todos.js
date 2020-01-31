@@ -9,6 +9,7 @@ class Todos extends Component {
 
     return this.props.todos.map(todo => (
       <TodoItem
+        onEdit={this.props.onEdit}
         key={todo.id}
         todo={todo}
         markComplete={this.props.markComplete}

@@ -13,6 +13,7 @@ import Actions from './actions/Actions';
 // import moment from 'moment';
 // import _ from 'lodash';
 // import SimpleModal from './SimpleModal';
+import FormDialog from './FormDialog';
 
 class App extends React.Component {
   constructor(props) {
@@ -75,6 +76,14 @@ class App extends React.Component {
     }
   };
 
+  onEdit = () => {
+    this.setState({ showDialog: true });
+  };
+
+  onClose = () => {
+    this.setState({ showDialog: false });
+  };
+
   render() {
     return (
       <Router>
@@ -86,12 +95,13 @@ class App extends React.Component {
               path='/'
               render={props => (
                 <React.Fragment>
-                  {/* {this.state.showDialog && (
-                    <SimpleModal close={this.closeModal} />
-                  )} */}
+                  {this.state.showDialog && (
+                    <FormDialog onClose={this.onClose} />
+                  )}
                   <AddTodo addTodo={this.addTodo} />
 
                   <Todos
+                    onEdit={this.onEdit}
                     todos={this.state.todos}
                     markComplete={this.markComplete}
                     delTodo={this.delTodo}

@@ -21,10 +21,10 @@ export class TodoItem extends Component {
     };
   };
 
-  onEdit = id => {
-    // this.setState({ id: e.target.value });
-    Actions.editItemFromLocalStorage(id);
-  };
+  // onEdit = id => {
+  //   // this.setState({ id: e.target.value });
+  //   Actions.editItemFromLocalStorage(id);
+  // };
 
   render() {
     const { id, title } = this.props.todo;
@@ -39,7 +39,7 @@ export class TodoItem extends Component {
           <Button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>
             <DeleteIcon></DeleteIcon>
           </Button>
-          <Button onClick={() => this.onEdit(id)} style={btnStyle}>
+          <Button onClick={() => this.props.onEdit(id)} style={btnStyle}>
             <EditIcon></EditIcon>
           </Button>
         </p>
